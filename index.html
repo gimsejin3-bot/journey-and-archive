@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="여행의 경로와 세상의 사건을 한 페이지에 기록하는 Journey & Archive.">
+  <title>Journey & Archive — 여행과 사건의 기록</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="Journey & Archive 홈">
+        <span class="brand-icon" aria-hidden="true">J<span>&</span>A</span>
+        <span>journey <b>&</b> archive</span>
+      </a>
+      <nav class="main-nav" aria-label="주요 섹션">
+        <a class="nav-link active" href="#top" data-nav="all">전체 보기</a>
+        <a class="nav-link" href="#journey" data-nav="journey">✈️ Journey Map</a>
+        <a class="nav-link" href="#archive" data-nav="archive">🔍 Case Archive</a>
+      </nav>
+      <button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="hero-kicker"><span class="kicker-sticker" aria-hidden="true">✳</span> FIELD NOTES FOR A WIDER WORLD</p>
+          <h1 id="hero-title">발길 닿는 곳의 여정과 <span>세상을 읽는 기록</span></h1>
+          <p>여행과 사건, 그 사이의 맥락.</p>
+        </div>
+        <a class="hero-cta" href="#journey">여정 둘러보기 <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="journey-section section-shell" id="journey" aria-labelledby="journey-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker"><span class="sticker-dot sticker-pink"></span> JOURNEY · 여행 루트 & 지도</p>
+          <h2 id="journey-title">다음 장면을 <span>지도에서.</span></h2>
+        </div>
+      </div>
+
+      <div class="country-toolbar">
+        <div class="country-pills" id="country-list" aria-label="여행 국가 선택"></div>
+        <span class="route-total"><strong id="route-total">10</strong> curated routes</span>
+      </div>
+
+      <div class="map-card" id="journey-map">
+        <div class="map-header">
+          <div><span class="map-live-dot"></span><strong id="map-status">WORLD VIEW</strong><span class="map-coordinates" id="map-coordinates">4 COUNTRIES · 10 ROUTES</span></div>
+          <button type="button" class="map-reset" id="map-reset" hidden><span aria-hidden="true">↺</span> 세계 지도</button>
+        </div>
+        <div id="travel-map" role="application" aria-label="국가별 여행 루트가 표시되는 인터랙티브 지도"></div>
+        <div class="map-footer"><span><i class="legend-pin"></i> 국가</span><span><i class="legend-line"></i> 도보 루트</span><span class="map-credit">지도 타일 © OpenStreetMap</span></div>
+      </div>
+
+      <div class="spot-heading" id="spot-heading" aria-live="polite">
+        <div><p class="section-kicker">PHOTO JOURNAL</p><h3 id="spot-title">여행 루트</h3></div>
+        <span id="spot-count" class="spot-count">10 ROUTES</span>
+      </div>
+      <div class="route-grid" id="route-grid" aria-live="polite"></div>
+
+      <section class="route-detail-section" id="route-detail" aria-live="polite" aria-labelledby="detail-title" hidden tabindex="-1">
+        <div class="detail-heading">
+          <div class="detail-heading-copy">
+            <p class="section-kicker"><span class="sticker-dot sticker-pink"></span><span id="detail-meta">ROUTE NOTES</span></p>
+            <h3 id="detail-title"></h3>
+            <p id="detail-description" class="detail-description"></p>
+          </div>
+          <a class="detail-map-link" href="#journey-map">지도에서 보기 <span aria-hidden="true">↗</span></a>
+        </div>
+        <article class="detail-card places-card">
+          <div class="detail-card-heading"><span class="detail-sticker sticker-teal" aria-hidden="true">⌖</span><div><p class="detail-overline">WALKING NOTES</p><h4>걸어서 만날 곳</h4></div></div>
+          <div class="place-grid" id="detail-places"></div>
+        </article>
+        <div class="detail-recommendation-grid">
+          <article class="detail-card recommendation-card" id="detail-food"></article>
+          <article class="detail-card recommendation-card" id="detail-transit"></article>
+          <article class="detail-card recommendation-card" id="detail-swim"></article>
+        </div>
+      </section>
+    </section>
+
+    <section class="archive-section" id="archive" aria-labelledby="archive-title">
+      <div class="section-shell">
+        <div class="section-heading archive-heading">
+          <div>
+            <p class="section-kicker"><span class="sticker-dot sticker-blue"></span> ARCHIVE · 사건 & 시사</p>
+            <h2 id="archive-title">복잡한 사건을 <span>차근차근.</span></h2>
+          </div>
+        </div>
+        <div class="archive-toolbar"><span><strong id="archive-total">09</strong>개의 기록</span><span>CASE NOTES · 2024—26</span></div>
+        <div class="archive-list" id="archive-list" aria-label="사건·시사 아카이브 목록"></div>
+        <p class="archive-disclaimer">아카이브는 일반적인 정보 제공을 위한 자료이며 법률 자문이 아닙니다. 법적 판단은 관할과 구체적 사실에 따라 달라질 수 있습니다.</p>
+      </div>
+    </section>
+
+    <footer class="site-footer" id="about">
+      <a class="footer-brand" href="#top">journey <b>&</b> archive</a>
+      <p>세상을 걸어보고, 맥락을 기록합니다.</p>
+      <a class="back-top" href="#top">위로 <span aria-hidden="true">↑</span></a>
+    </footer>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
